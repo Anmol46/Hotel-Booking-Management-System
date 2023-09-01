@@ -1,0 +1,72 @@
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\appsettings.Development.json
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\appsettings.json
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Hotel Management System.exe
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Hotel Management System.deps.json
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Hotel Management System.runtimeconfig.json
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Hotel Management System.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Hotel Management System.pdb
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Humanizer.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.csproj.AssemblyReference.cache
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.GeneratedMSBuildEditorConfig.editorconfig
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.AssemblyInfoInputs.cache
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.AssemblyInfo.cs
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.csproj.CoreCompileInputs.cache
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.MvcApplicationPartsAssemblyInfo.cs
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.MvcApplicationPartsAssemblyInfo.cache
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\staticwebassets.build.json
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\staticwebassets.development.json
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\scopedcss\bundle\Hotel Management System.styles.css
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.csproj.CopyComplete
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.dll
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\refint\Hotel Management System.dll
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.pdb
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\Hotel Management System.genruntimeconfig.cache
+C:\DotNetCore Projects\Hotel Management System\obj\Debug\net6.0\ref\Hotel Management System.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\DotNetCore Projects\Hotel Management System\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
