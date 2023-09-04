@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations;
 namespace DtoModel{
 
     public class CreateUserViewModel {
+
+        [Required(ErrorMessage = "Username is required.")]
+        [MinLength(3, ErrorMessage = "First name should be atleast 2 characters.")]
+        [MaxLength(30, ErrorMessage = "First name should be between 2 and 30 characters.")]
+        public string UserName { get; set; }
         
         [Required(ErrorMessage = "First name is required.")]
         [MinLength(2, ErrorMessage = "First name should be atleast 2 characters.")]

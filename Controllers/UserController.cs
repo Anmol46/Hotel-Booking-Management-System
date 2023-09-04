@@ -20,17 +20,19 @@ namespace Controllers
 
         private readonly IUserRepository userRepository;
 
+        private readonly UserManager<AppIdentityUser> userManager;
+
         public UserController(DataContext dataContext, IUserRepository userRepository, ILoggerFactory
-        loggerFactory)
+        loggerFactory, UserManager<AppIdentityUser> userManager)
         {
             this.dataContext = dataContext;
             this.userRepository = userRepository;
+            this.userManager = userManager;
             logger = loggerFactory.CreateLogger<UserController>();
         }
 
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [AllowAnonymous]
@@ -60,7 +62,7 @@ namespace Controllers
             }
             else
             {
-                return UnprocessableEntity();
+                return UnprocessableEntity("Could not create an account the with the provided details");
             }
 
             return BadRequest();
@@ -68,18 +70,45 @@ namespace Controllers
         }
 
 
-        // public List<AppIdentityUser> ListUsers()
-        // {
-        //     var response = userRepository.;
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [HttpPost("delete/{id}")]
+        public async Task<ActionResult> DeleteUser(DeleteUserViewModel deleteUserViewModel)
+        {
 
-        //     if (response != null)
-        //     {
-        //         return response.ToList();
-        //     }
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(deleteUserViewModel.Email);
 
-        //     List<AppIdentityUser> list = new List<AppIdentityUser>();
+                if (user != null)
+                {
+                    var response = await userRepository.DeleteUser(user);
 
-        //     return list;
-        // }
+                    if(response){
+                        return Ok("User deleted successfully");
+                    }
+                }
+
+                return UnprocessableEntity("Cannot find any user registered with this email");
+            }
+
+            return BadRequest();
+        }
+
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult<List<UserInfo>>> ListUsers()
+        {
+            var response = await userRepository.ListUsers();
+
+            if (response != null)
+            {
+                return Ok(response);
+            }
+
+            return NoContent();
+        }
     }
 }

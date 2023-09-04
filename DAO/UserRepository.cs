@@ -3,6 +3,7 @@ using DtoModel;
 using Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace DAO
@@ -24,56 +25,52 @@ namespace DAO
             logger = loggerFactory.CreateLogger<UserRepository>();
         }
 
-        public bool AddBooking(Booking booking)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<UserInfo> CreateUser(CreateUserViewModel createUserViewModel)
-        {
-            var result = await userManager.CreateAsync(new AppIdentityUser
-            {
-                UserName = "Anmoa122",
-                Id = Guid.NewGuid().ToString(),
-                FirstName = createUserViewModel.FirstName,
-                LastName = createUserViewModel.LastName,
-                PhoneNumber = createUserViewModel.PhoneNumber,
-                Email = createUserViewModel.Email
-            }, createUserViewModel.Password);
-
-            if (result.Succeeded)
-            {
-                var createdUser = await userManager.FindByEmailAsync(createUserViewModel.Email);
-
-                return new UserInfo
-                {
-                    FirstName = createdUser.FirstName,
-                    LastName = createdUser.LastName,
-                    Email = createdUser.Email,
-                    Phone = createdUser.PhoneNumber
-                };
-            }
-
-            UserInfo userInfo = new UserInfo();
-
-            return userInfo;
-        }
-
-        public async Task<bool> DeleteUser(string Id)
         {
             try
             {
-
-                AppIdentityUser user = dataContext.users.Where(x => x.Id == Id).FirstOrDefault();
-
-                if (user != null)
+                var result = await userManager.CreateAsync(new AppIdentityUser
                 {
-                    dataContext.Remove(user);
-                    await dataContext.SaveChangesAsync();
-                    return true;
+                    UserName = createUserViewModel.UserName,
+                    Id = Guid.NewGuid().ToString(),
+                    FirstName = createUserViewModel.FirstName,
+                    LastName = createUserViewModel.LastName,
+                    PhoneNumber = createUserViewModel.PhoneNumber,
+                    Email = createUserViewModel.Email
+                }, createUserViewModel.Password);
+
+                if (result.Succeeded)
+                {
+                    var createdUser = await userManager.FindByEmailAsync(createUserViewModel.Email);
+
+                    return new UserInfo
+                    {
+                        FirstName = createdUser.FirstName,
+                        LastName = createdUser.LastName,
+                        Email = createdUser.Email,
+                        Phone = createdUser.PhoneNumber
+                    };
                 }
 
-                return false;
+                UserInfo emptyUserInfo = new UserInfo();
+                return emptyUserInfo;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                UserInfo emptyUserInfo = new UserInfo();
+                return emptyUserInfo;
+            }
+
+        }
+
+        public async Task<bool> DeleteUser(AppIdentityUser User)
+        {
+            try
+            {
+                await userManager.DeleteAsync(User);
+                dataContext.SaveChanges();
+                return true;
             }
 
             catch (Exception ex)
@@ -88,14 +85,34 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        // public List<AppIdentityUser> ListUsers()
-        // {
-        //     var response = dataContext.users.ToList();
+        public async Task<List<UserInfo>> ListUsers()
+        {
+            var response = await dataContext.users.ToListAsync();
 
-        //     if(response != null){
+            List<UserInfo> userInfos = new List<UserInfo>();
 
-        //     }
-        // }
+            if (response.Count() > 0)
+            {
+
+                foreach (var user in response)
+                {
+                    userInfos.Add(
+                        new UserInfo
+                        {
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Phone = user.PhoneNumber,
+                            Email = user.Email
+                        }
+                    );
+                }
+
+                return userInfos;
+            }
+
+            return userInfos;
+
+        }
 
         public bool RemoveBooking(string BookingId)
         {

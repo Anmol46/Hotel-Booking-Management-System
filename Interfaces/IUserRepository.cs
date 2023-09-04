@@ -9,7 +9,7 @@ namespace Interfaces
 
         Task<UserInfo> CreateUser(CreateUserViewModel createUserViewModel);
 
-        Task<bool> DeleteUser(string Id);
+        Task<bool> DeleteUser(AppIdentityUser User);
 
         bool UpdateFirstName(string firstname);
 
@@ -19,11 +19,9 @@ namespace Interfaces
 
         bool UpdatePhoneNumber(string NewPhoneNumber);
 
-        bool AddBooking(Booking booking);
-
         bool RemoveBooking(string BookingId);
 
-        // List<AppIdentityUser> ListUsers();
+        Task<List<UserInfo>> ListUsers();
 
         AppIdentityUser GetUserById(string UserId);
 
