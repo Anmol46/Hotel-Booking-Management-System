@@ -29,5 +29,14 @@ namespace Models
 
         public AppIdentityUser User { get; set; }
 
+
+        public void UpdatePaidStatus (bool Paid) {
+            this.Paid = Paid;
+        }
+
+        public void UpdateCheckOut(DateTime CheckOut){
+            this.CheckOut = CheckOut;
+        }
+
     }
 }

@@ -1,7 +1,9 @@
 using Data;
 using DtoModel;
 using Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace DAO
@@ -14,12 +16,16 @@ namespace DAO
 
         private readonly ILogger logger;
 
+        private readonly UserManager<AppIdentityUser> userManager;
 
-        public BookingRepository(DataContext dataContext, ILoggerFactory loggerFactory)
+        private readonly BookingRepository bookingRepository;
+
+
+        public BookingRepository(DataContext dataContext, ILoggerFactory loggerFactory, UserManager<AppIdentityUser> userManager)
         {
             this.dataContext = dataContext;
+            this.userManager = userManager;
             logger = loggerFactory.CreateLogger<BookingRepository>();
-
         }
 
         public async Task<bool> CreateBooking(CreateBookingViewModel createBookingViewModel)
@@ -53,6 +59,70 @@ namespace DAO
                 return false;
             }
 
+        }
+
+
+        public async Task<bool> UpdatePaidStatus(UpdateUserPaidStatusViewModel updateUserPaidStatusViewModel)
+        {
+            try
+            {
+                var user = await userManager.FindByIdAsync(updateUserPaidStatusViewModel.UserId);
+
+                if (user != null)
+                {
+                    var booking = await dataContext.Bookings.Where(x => x.UserId == updateUserPaidStatusViewModel.UserId).FirstOrDefaultAsync();
+
+                    if (booking != null)
+                    {
+                        booking.UpdatePaidStatus(updateUserPaidStatusViewModel.Paid);
+                        dataContext.Bookings.Update(booking);
+                        await dataContext.SaveChangesAsync();
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
+        }
+
+
+        public async Task<bool> UpdateCheckOut(UpdateCheckOutViewModel updateCheckOutViewModel)
+        {
+
+            try
+            {
+                var user = await dataContext.users.Where(x => x.Id == updateCheckOutViewModel.UserId).FirstOrDefaultAsync();
+
+                if (user != null)
+                {
+
+                    var booking = await dataContext.Bookings.Where(x => x.UserId == updateCheckOutViewModel.UserId).FirstOrDefaultAsync();
+
+                    if (booking != null)
+                    {
+                        booking.UpdateCheckOut(updateCheckOutViewModel.CheckOut);
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
         }
 
     }

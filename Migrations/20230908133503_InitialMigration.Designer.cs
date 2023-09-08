@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel_Management_System.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230829140612_InitialMigration")]
+    [Migration("20230908133503_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -284,10 +284,12 @@ namespace Hotel_Management_System.Migrations
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("RoomType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("RoomTypeID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RoomId");
+
+                    b.HasIndex("RoomTypeID");
 
                     b.ToTable("Rooms");
                 });
@@ -363,6 +365,15 @@ namespace Hotel_Management_System.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.Room", b =>
+                {
+                    b.HasOne("Models.RoomType", "RoomType")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeID");
+
+                    b.Navigation("RoomType");
                 });
 
             modelBuilder.Entity("Models.AppIdentityUser", b =>
