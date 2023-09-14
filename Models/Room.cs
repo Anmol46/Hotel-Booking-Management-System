@@ -3,7 +3,7 @@ namespace Models
     public class Room
     {
 
-        public RoomType RoomType { get; set; }
+        public int RoomType { get; set; }
 
         public string RoomId { get; set; }
 

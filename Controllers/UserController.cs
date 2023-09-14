@@ -20,13 +20,16 @@ namespace Controllers
 
         private readonly IUserRepository userRepository;
 
+        private readonly IBookingRepository bookingRepository;
+
         private readonly UserManager<AppIdentityUser> userManager;
 
-        public UserController(DataContext dataContext, IUserRepository userRepository, ILoggerFactory
+        public UserController(DataContext dataContext, IUserRepository userRepository, IBookingRepository bookingRepository, ILoggerFactory
         loggerFactory, UserManager<AppIdentityUser> userManager)
         {
             this.dataContext = dataContext;
             this.userRepository = userRepository;
+            this.bookingRepository = bookingRepository;
             this.userManager = userManager;
             logger = loggerFactory.CreateLogger<UserController>();
         }
@@ -81,7 +84,9 @@ namespace Controllers
             {
                 var user = await userManager.FindByEmailAsync(deleteUserViewModel.Email);
 
-                if (user != null)
+                var deletedBookings = await bookingRepository.DeleteAllBookingsOfUser(user.Id);
+
+                if (user != null && deletedBookings)
                 {
                     var response = await userRepository.DeleteUser(user);
 

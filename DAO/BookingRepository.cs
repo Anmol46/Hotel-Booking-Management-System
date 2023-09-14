@@ -18,8 +18,6 @@ namespace DAO
 
         private readonly UserManager<AppIdentityUser> userManager;
 
-        private readonly BookingRepository bookingRepository;
-
 
         public BookingRepository(DataContext dataContext, ILoggerFactory loggerFactory, UserManager<AppIdentityUser> userManager)
         {
@@ -125,5 +123,54 @@ namespace DAO
             }
         }
 
+        public async Task<bool> DeleteBooking(string BookingId)
+        {
+            try
+            {
+                var booking = await dataContext.Bookings.Where(x => x.Id == BookingId).FirstOrDefaultAsync();
+
+                if (booking != null)
+                {
+                    dataContext.Remove(booking);
+                    dataContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+
+            catch(Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteAllBookingsOfUser(string UserId)
+        {
+            try
+            {
+                var user = await userManager.FindByIdAsync(UserId);
+
+                if (user != null)
+                {
+                    var bookings = await dataContext.Bookings.Select(x => x.UserId == UserId).ToListAsync();
+                    dataContext.RemoveRange(bookings);
+                    dataContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
+
+        }
+
     }
+
 }

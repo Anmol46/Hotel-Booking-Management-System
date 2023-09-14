@@ -14,13 +14,16 @@ namespace DAO
 
         private readonly UserManager<AppIdentityUser> userManager;
 
+        private readonly IBookingRepository bookingRepository;
+
         private readonly ILogger logger;
 
         private readonly DataContext dataContext;
 
-        public UserRepository(UserManager<AppIdentityUser> userManager, DataContext dataContext, ILoggerFactory loggerFactory)
+        public UserRepository(UserManager<AppIdentityUser> userManager, DataContext dataContext, IBookingRepository bookingRepository, ILoggerFactory loggerFactory)
         {
             this.userManager = userManager;
+            this.bookingRepository = bookingRepository;
             this.dataContext = dataContext;
             logger = loggerFactory.CreateLogger<UserRepository>();
         }
@@ -29,31 +32,39 @@ namespace DAO
         {
             try
             {
-                var result = await userManager.CreateAsync(new AppIdentityUser
-                {
-                    UserName = createUserViewModel.UserName,
-                    Id = Guid.NewGuid().ToString(),
-                    FirstName = createUserViewModel.FirstName,
-                    LastName = createUserViewModel.LastName,
-                    PhoneNumber = createUserViewModel.PhoneNumber,
-                    Email = createUserViewModel.Email
-                }, createUserViewModel.Password);
+                var userWithEmail = await userManager.FindByEmailAsync(createUserViewModel.Email);
+                var userWithPhone = await dataContext.users.Select(x => x.PhoneNumber == createUserViewModel.PhoneNumber).FirstOrDefaultAsync();
+                var userWithName = await userManager.FindByNameAsync(createUserViewModel.UserName);
 
-                if (result.Succeeded)
+                if (userWithEmail == null && !userWithPhone && userWithName == null)
                 {
-                    var createdUser = await userManager.FindByEmailAsync(createUserViewModel.Email);
-
-                    return new UserInfo
+                    var result = await userManager.CreateAsync(new AppIdentityUser
                     {
-                        FirstName = createdUser.FirstName,
-                        LastName = createdUser.LastName,
-                        Email = createdUser.Email,
-                        Phone = createdUser.PhoneNumber
-                    };
+                        UserName = createUserViewModel.UserName,
+                        Id = Guid.NewGuid().ToString(),
+                        FirstName = createUserViewModel.FirstName,
+                        LastName = createUserViewModel.LastName,
+                        PhoneNumber = createUserViewModel.PhoneNumber,
+                        Email = createUserViewModel.Email
+                    }, createUserViewModel.Password);
+
+                    if (result.Succeeded)
+                    {
+                        var createdUser = await userManager.FindByEmailAsync(createUserViewModel.Email);
+
+                        return new UserInfo
+                        {
+                            FirstName = createdUser.FirstName,
+                            LastName = createdUser.LastName,
+                            Email = createdUser.Email,
+                            Phone = createdUser.PhoneNumber
+                        };
+                    }
+
+                    return new UserInfo();
                 }
 
-                UserInfo emptyUserInfo = new UserInfo();
-                return emptyUserInfo;
+                return new UserInfo();
             }
             catch (Exception ex)
             {
@@ -80,9 +91,9 @@ namespace DAO
             }
         }
 
-        public AppIdentityUser GetUserById(string UserId)
+        public async Task<AppIdentityUser> GetUserById(string UserId)
         {
-            throw new NotImplementedException();
+            return await userManager.FindByIdAsync(UserId);
         }
 
         public async Task<List<UserInfo>> ListUsers()
@@ -114,14 +125,30 @@ namespace DAO
 
         }
 
-        public bool RemoveBooking(string BookingId)
+        public async Task<bool> RemoveBooking(string BookingId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await bookingRepository.DeleteBooking(BookingId);
+
+                if (response)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
         }
 
         public bool UpdateEmail(string NewEmail)
         {
-            throw new NotImplementedException();
+            
         }
 
         public bool UpdateFirstName(string firstname)
