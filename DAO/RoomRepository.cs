@@ -1,12 +1,13 @@
 using Data;
 using DtoModel;
+using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace DAO
 {
 
-    public class RoomRepository
+    public class RoomRepository : IRoomRepository
     {
 
         private readonly DataContext dataContext;
@@ -45,6 +46,37 @@ namespace DAO
             }
 
         }
+
+        public async Task<bool> UpdatePrice(UpdateRoomPriceViewModel updateRoomPriceViewModel)
+        {
+            try
+            {
+                var room = await dataContext.Rooms.Where(x => x.RoomId == updateRoomPriceViewModel.RoomId).FirstOrDefaultAsync();
+                room.UpdatePrice(updateRoomPriceViewModel.NewPrice);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAvailability(UpdateRoomAvailabityViewModel updateRoomAvailabityViewModel)
+        {
+            try
+            {
+                var room = await dataContext.Rooms.Where(x => x.RoomId == updateRoomAvailabityViewModel.RoomId).FirstOrDefaultAsync();
+                room.UpdateAvailability(updateRoomAvailabityViewModel.Availability);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
+        }
+
         public async Task<bool> DeleteRoom(string RoomId)
         {
             try

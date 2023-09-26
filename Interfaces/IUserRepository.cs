@@ -15,15 +15,15 @@ namespace Interfaces
 
         bool UpdateLastName(string lastname);
 
-        bool UpdateEmail(string NewEmail);
+        Task<bool> UpdateEmail(UpdateUserEmailViewModel updateUserEmailViewModel);
 
         bool UpdatePhoneNumber(string NewPhoneNumber);
 
-        bool RemoveBooking(string BookingId);
+        Task<bool> RemoveBooking(string BookingId);
 
         Task<List<UserInfo>> ListUsers();
 
-        AppIdentityUser GetUserById(string UserId);
+        Task<AppIdentityUser> GetUserById(string UserId);
 
     }
 }

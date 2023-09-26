@@ -21,6 +21,12 @@ namespace Models
 
         public virtual List<Booking> Bookings { get; set; }
 
+
+        public void UpdateUserEmail(string NewEmail)
+        {
+            this.Email = NewEmail;
+        }
+
     }
 
 }

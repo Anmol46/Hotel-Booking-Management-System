@@ -72,6 +72,37 @@ namespace Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [HttpPost("updateEmail")]
+        public async Task<ActionResult> UpdateUserEmail(UpdateUserEmailViewModel updateUserEmailViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await userManager.FindByEmailAsync(updateUserEmailViewModel.NewEmail);
+
+                    if (user != null)
+                    {
+                        return UnprocessableEntity("This email ID is already registered with another account");
+                    }
+
+                    user.UpdateUserEmail(updateUserEmailViewModel.NewEmail);
+                    dataContext.users.Update(user);
+                    return Ok("Email updated successfully");
+                }
+
+                catch (Exception ex)
+                {
+                    logger.LogError(ex.StackTrace);
+                }
+            }
+
+            return BadRequest();
+
+        }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,7 +121,8 @@ namespace Controllers
                 {
                     var response = await userRepository.DeleteUser(user);
 
-                    if(response){
+                    if (response)
+                    {
                         return Ok("User deleted successfully");
                     }
                 }

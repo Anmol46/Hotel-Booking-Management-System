@@ -146,9 +146,28 @@ namespace DAO
             }
         }
 
-        public bool UpdateEmail(string NewEmail)
+        public async Task<bool> UpdateEmail(UpdateUserEmailViewModel updateUserEmailViewModel)
         {
-            
+            try
+            {
+                var user = await userManager.FindByIdAsync(updateUserEmailViewModel.UserId);
+                await userManager.SetEmailAsync(user, updateUserEmailViewModel.NewEmail);
+                var emailConfirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var result = await userManager.ConfirmEmailAsync(user, emailConfirmationToken); 
+                
+                if(result.Succeeded)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                return false;
+            }
         }
 
         public bool UpdateFirstName(string firstname)
