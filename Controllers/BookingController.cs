@@ -1,3 +1,4 @@
+using System.Net;
 using System.Runtime.Intrinsics.X86;
 using DAO;
 using Data;
@@ -29,7 +30,10 @@ namespace Controllers
             logger = loggerFactory.CreateLogger<BookingController>();
         }
 
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("create")]
         public async Task<ActionResult> CreateBooking(CreateBookingViewModel createBookingViewModel)
         {
 

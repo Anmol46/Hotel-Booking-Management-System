@@ -8,6 +8,8 @@ using Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 builder.Services.AddControllers();
 

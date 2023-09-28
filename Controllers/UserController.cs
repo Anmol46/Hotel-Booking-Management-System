@@ -136,6 +136,7 @@ namespace Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpGet("list")]
         public async Task<ActionResult<List<UserInfo>>> ListUsers()
         {
             var response = await userRepository.ListUsers();
